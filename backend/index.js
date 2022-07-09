@@ -3,7 +3,11 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 
+import transactionRoutes from "./routes/transactions.js"
+
 const app = express();
+
+app.use("/transactions", transactionRoutes)
 
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
