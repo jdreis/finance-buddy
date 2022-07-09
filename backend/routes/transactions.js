@@ -1,9 +1,9 @@
 import express from "express";
 
+import { getTransaction } from "../controllers/transactions.js";
+
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("list of transactions made");
-});
+router.get("/", getTransaction);
 
 export default router;
