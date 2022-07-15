@@ -1,22 +1,16 @@
-import React from "react";
-import { BrowserRouter as Router, Route,  } from "react-router-dom";
+// data
+import { expenses } from "./expenses.js";
 
+// components
 import "./App.css";
+import Bills from './components/Widgets/Bills.js'
 
-import NavBar from "./components/NavBar";
-
-function App() {
-  return (
-  <Router>
+const App = () => {
+  return(
     <div className="App">
-      <NavBar />
-
-      
-        <Route path="/" component={NavBar} />
-      
+      <Bills expenses={expenses} /> 
     </div>
-  </Router>
   );
-}
+};
 
 export default App;
