@@ -1,9 +1,16 @@
-import express from "express";
-
-import { getTransaction } from "../controllers/transactions.js";
+const express = require("express");
+const Transaction = require("../models/transactionsType");
 
 const router = express.Router();
 
-router.get("/", getTransaction);
+router.get("/", async (req, res) => {
+  const transactions = await Transaction.find();
+  res.json(transactions);
+});
 
-export default router;
+router.post("/create", async (req, res) => {
+  const transactions = await Transaction.create(req.body);
+  res.json(transactions);
+});
+
+module.exports = router;

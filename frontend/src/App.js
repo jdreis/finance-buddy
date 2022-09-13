@@ -7,7 +7,7 @@ import Bills from './components/Widgets/Bills.js'
 
 const App = () => {
   return(
-    <div className="App">
+    <div className="app">
       <Bills expenses={expenses} /> 
     </div>
   );

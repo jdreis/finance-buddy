@@ -1,12 +1,14 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
-
-const transactionSchema = new Schema({
-  title: { type: String, required: true },
-  amount: { type: Number, required: true },
+const TransactionSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  amount: {
+    type: Number,
+    required: true,
+  },
 });
 
-const Transaction = mongoose.model("Transaction", transactionSchema);
-
-export default Transaction;
+module.exports = mongoose.model('Transaction', TransactionSchema)

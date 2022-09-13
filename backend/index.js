@@ -1,23 +1,33 @@
-import express from "express";
-import bodyParser from "body-parser";
-import mongoose from "mongoose";
-import cors from "cors";
-
-import transactionRoutes from "./routes/transactions.js"
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const transactionsView = require("./routes/transactions.js");
+// const loginView = require("./routes/login.js");
+if (process.env.node !== "production") {
+  require("dotenv").config();
+}
 
 const app = express();
 
-app.use("/transactions", transactionRoutes)
-
-app.use(bodyParser.json({ extended: true }));
-app.use(bodyParser.urlencoded({ extended: true }));
+// middlewares
 app.use(cors());
+app.use(express.json());
 
-const CONNECTION_URL =
-  "mongodb+srv://jenareis:Password123@cluster0.cvz5i.mongodb.net/?retryWrites=true&w=majority";
+// routes
+app.get(transactionsView)
+app.use("/transactions", transactionsView);
+// app.use("/login", loginView);
+
+
+// db connection
+mongoose
+  .connect('mongodb+srv://jenareis:Password123@cluster0.cvz5i.mongodb.net/?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log("DB connected"))
+  .catch((err) => console.error(err));
+
 const PORT = process.env.PORT || 3001;
 
-mongoose
-  .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => app.listen(PORT, () => console.log(`nomming on port ${PORT} `)))
-  .catch((error) => console.log(error.message));
+app.listen(PORT, () => console.log(`nomming on port ${PORT}`));
