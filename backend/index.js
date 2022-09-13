@@ -25,9 +25,10 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
-  .then(() => console.log("DB connected"))
+  .then(() => console.log("database is connected"))
   .catch((err) => console.error(err));
 
 const PORT = process.env.PORT || 3001;
+
 
 app.listen(PORT, () => console.log(`nomming on port ${PORT}`));
